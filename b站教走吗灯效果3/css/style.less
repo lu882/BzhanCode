@@ -1,0 +1,81 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 思源黑体;
+}
+
+.container {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background-color: #fefbd0;
+    padding: 40px;
+    overflow: hidden;
+}
+
+.left {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    justify-content: center;
+
+    .logo {
+        font-size: 5vw;
+        color: #0d3346;
+        mix-blend-mode: exclusion;
+    }
+
+    .title {
+        width: 100%;
+        display: flex;
+        padding: 100px 0;
+        color: #64eb828f;
+        mix-blend-mode: exclusion;
+        font-size: 3vw;
+        text-shadow: 2px 1px 13px #0d3346;
+    }
+
+    .buttonChange {
+        width: 100px;
+        padding: 20px;
+        border-radius: 20px;
+        box-shadow: inset -1px 1px 12px 15px rgba(171, 196, 188, 0.5);
+        background-color: #beb4b4;
+    }
+}
+
+.circle-container {
+    width: 300px;
+    height: 150px;
+    position: relative;
+    perspective: 1000px;
+    margin-top: 20%;
+
+    .img {
+        position: absolute;
+        width: 150px;
+        height: 180px;
+        transition: transform 0.3s ease;
+        transform-style: preserve-3d;
+        border: 2px double #000;
+        border-radius: 10px;
+        transform: translateZ(150px);
+    }
+}
+
+// 循环 z-index 从10到2 变小
+.circle-container {
+    @num-images: 9;
+
+    .loop(@index) when (@index>0) {
+        img:nth-child(@{index}) {
+            z-index: @num-images - @index + 1;
+        }
+
+        .loop(@index - 1);
+    }
+// 刚刚不知道为啥会报错，写是没毛病的，编译器出现了问题
+    .loop(@num-images);
+
+}
