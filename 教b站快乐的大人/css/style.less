@@ -1,0 +1,188 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+// 定义位置 大家也可以用js来定义哈，我写在css就懒得改了
+@sqrt3: 1.732;
+@vh50: 50vh;
+
+@translated-x1: @vh50 + (@vh50 / 2);
+@translated-y1: (@vh50 - (@vh50 * @sqrt3 / 2));
+
+
+@translated-x2: @vh50 + (@vh50 * @sqrt3 / 2);
+@translated-y2: (@vh50 - (@vh50 / 2));
+
+
+@translated-x3: 100vh;
+@translated-y3: 50vh;
+
+@translated-x4: @vh50 + (@vh50 * @sqrt3 / 2);
+@translated-y4: (@vh50 + (@vh50 / 2));
+
+
+.container::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: url("../images/background.jpg");
+    background-size: cover;
+    background-position: center;
+    filter: blur(10px);
+    // 确保伪元素位于内容之下
+    z-index: -1;
+}
+
+.container {
+    width: 100%;
+    height: 100vh;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    background-color: #39a3d38c;
+    backdrop-filter: blur(10px);
+    -webkiit-backdrop-filter: blur(10px);
+
+    .title {
+        position: absolute;
+        font-size: 8vw;
+        left: 50%;
+        transform: translateX(-50%);
+        font-family: 'Arial', sans-serif;
+        font-weight: 700;
+
+        background: linear-gradient(135deg, #6cf35d, #2ea0dc);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+
+    }
+
+    .slider-wrapper-white {
+        position: relative;
+        // 确保长宽高一致，弄成一个半圆
+        width: 100vh;
+        height: 100vh;
+        background-color: #39a3d38c;
+        border-radius: 50%;
+        box-shadow: inset -20px 0px 20px 20px #fff;
+        transform: translateX(-50%) rotate(15deg);
+
+        .slider-wrapper-img {
+            position: absolute;
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            object-fit: cover;
+            transform: translate(-40px, -40px);
+            border: 5px double #8cb677;
+            cursor: pointer;
+        }
+
+        .slider-wrapper-img1 {
+            left: @translated-x1;
+            top: @translated-y1;
+        }
+
+        .slider-wrapper-img2 {
+            left: @translated-x2;
+            top: @translated-y2;
+        }
+
+        .slider-wrapper-img3 {
+            left: @translated-x3;
+            top: @translated-y3;
+        }
+
+        .slider-wrapper-img4 {
+            left: @translated-x4;
+            top: @translated-y4;
+        }
+
+
+        .triangle {
+            position: absolute;
+            width: 80px;
+            left: 50%;
+            top: -18vh;
+            transform: translateX(-50%);
+        }
+
+        .slider-wrapper-mask {
+            position: absolute;
+            top: 20vh;
+            left: 20vh;
+            width: 60vh;
+            height: 60vh;
+            border-radius: 50%;
+            border-width: 10vh;
+            border-style: solid;
+            border-color: #fff;
+            background: url(../images/ba.jpg);
+            background-size: cover;
+            background-position: center;
+            transform-origin: center;
+            // 刚开始就是旋转30度
+            transform: rotate(30deg);
+        }
+
+    }
+
+    .content {
+        flex: 1;
+        width: 100%;
+        transform: translateX(-30vh);
+
+        .slide-content {
+            width: 80%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            position: relative;
+
+            h1 {
+                color: #fff;
+                font-size: 5vw;
+                background: linear-gradient(135deg, #89f0b0, #e0cab9);
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+
+                text-shadow: 2px 2px 0px #59995e;
+            }
+
+            ul {
+
+                li {
+                    padding: 20px;
+                    font-size: 2vw;
+                    font-family: 华文琥珀;
+                    color: #fff;
+                    background: linear-gradient(135deg, #89f0b0, #dc2e2e);
+                    -webkit-background-clip: text;
+                    -webkit-text-fill-color: transparent;
+                    line-height: 35px;
+                    text-shadow: 2px 2px 1px #fff;
+
+                }
+
+            }
+
+            img{
+            position: absolute;
+            left: 80%;
+            bottom: 0;
+            width: 80%;
+            height: 80%;
+            object-fit: contain;
+            }
+        }
+    }
+
+}
